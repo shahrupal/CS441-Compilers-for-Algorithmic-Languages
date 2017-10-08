@@ -378,8 +378,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 24
-#define YY_END_OF_BUFFER 25
+#define YY_NUM_RULES 25
+#define YY_END_OF_BUFFER 26
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -389,13 +389,13 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[67] =
     {   0,
-        0,    0,   25,   24,   21,    8,   24,   24,    5,    6,
-        1,    2,    3,    4,   22,    7,   20,   24,   20,   23,
-       23,   23,   23,   23,   23,   23,   23,   23,   23,   21,
-       20,   19,    0,   22,   23,   23,   23,   23,   23,   13,
-       23,   23,   23,   23,   23,   23,   23,    9,   23,   23,
-       23,   23,   23,   23,   23,   14,   16,   23,   18,   23,
-       11,   15,   10,   17,   12,    0
+        0,    0,   26,   25,   22,    9,   25,   25,    6,    7,
+        2,    3,    4,    5,   23,    8,   21,    1,   21,   24,
+       24,   24,   24,   24,   24,   24,   24,   24,   24,   22,
+       21,   20,    0,   23,   24,   24,   24,   24,   24,   14,
+       24,   24,   24,   24,   24,   24,   24,   10,   24,   24,
+       24,   24,   24,   24,   24,   15,   17,   24,   19,   24,
+       12,   16,   11,   18,   13,    0
     } ;
 
 static yyconst YY_CHAR yy_ec[256] =
@@ -732,8 +732,7 @@ YY_DECL
 #line 16 "i2p.l"
 
 
-
-#line 737 "lex.yy.c"
+#line 736 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -792,41 +791,46 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
+#line 18 "i2p.l"
+{return '=';}
+	YY_BREAK
+case 2:
+YY_RULE_SETUP
 #line 19 "i2p.l"
 {return '*';}
 	YY_BREAK
-case 2:
+case 3:
 YY_RULE_SETUP
 #line 20 "i2p.l"
 {return '+';}
 	YY_BREAK
-case 3:
+case 4:
 YY_RULE_SETUP
 #line 21 "i2p.l"
 {return '-';}
 	YY_BREAK
-case 4:
+case 5:
 YY_RULE_SETUP
 #line 22 "i2p.l"
 {return '/';}
 	YY_BREAK
-case 5:
+case 6:
 YY_RULE_SETUP
 #line 23 "i2p.l"
 {return '(';}
 	YY_BREAK
-case 6:
+case 7:
 YY_RULE_SETUP
 #line 24 "i2p.l"
 {return ')';}
 	YY_BREAK
-case 7:
+case 8:
 YY_RULE_SETUP
 #line 25 "i2p.l"
 {return ';';}
 	YY_BREAK
-case 8:
-/* rule 8 can match eol */
+case 9:
+/* rule 9 can match eol */
 YY_RULE_SETUP
 #line 26 "i2p.l"
 {lineno++;}
@@ -835,72 +839,72 @@ case YY_STATE_EOF(INITIAL):
 #line 27 "i2p.l"
 {return DONE;}
 	YY_BREAK
-case 9:
+case 10:
 YY_RULE_SETUP
 #line 29 "i2p.l"
-{return DONE;}
+{return END;}
 	YY_BREAK
-case 10:
+case 11:
 YY_RULE_SETUP
 #line 30 "i2p.l"
 {return BEGN;}
 	YY_BREAK
-case 11:
+case 12:
 YY_RULE_SETUP
 #line 31 "i2p.l"
 {return READ;}
 	YY_BREAK
-case 12:
+case 13:
 YY_RULE_SETUP
 #line 32 "i2p.l"
 {return PRINT;}
 	YY_BREAK
-case 13:
+case 14:
 YY_RULE_SETUP
 #line 33 "i2p.l"
 {return IF;}
 	YY_BREAK
-case 14:
+case 15:
 YY_RULE_SETUP
 #line 34 "i2p.l"
 {return ELSE;}
 	YY_BREAK
-case 15:
+case 16:
 YY_RULE_SETUP
 #line 35 "i2p.l"
 {return THEN;}
 	YY_BREAK
-case 16:
+case 17:
 YY_RULE_SETUP
 #line 36 "i2p.l"
 {return GOTO;}
 	YY_BREAK
-case 17:
+case 18:
 YY_RULE_SETUP
 #line 37 "i2p.l"
 {return LABEL;}
 	YY_BREAK
-case 18:
+case 19:
 YY_RULE_SETUP
 #line 38 "i2p.l"
 {return NUL;}
 	YY_BREAK
-case 19:
+case 20:
 YY_RULE_SETUP
 #line 40 "i2p.l"
 {return STRING;}
 	YY_BREAK
-case 20:
+case 21:
 YY_RULE_SETUP
 #line 41 "i2p.l"
 {return COMPARATOR;}
 	YY_BREAK
-case 21:
+case 22:
 YY_RULE_SETUP
 #line 44 "i2p.l"
 {/* skip blanks and tabs */}
 	YY_BREAK
-case 22:
+case 23:
 YY_RULE_SETUP
 #line 46 "i2p.l"
 {
@@ -908,7 +912,7 @@ YY_RULE_SETUP
   return NUM;
 }
 	YY_BREAK
-case 23:
+case 24:
 YY_RULE_SETUP
 #line 51 "i2p.l"
 {
@@ -919,15 +923,17 @@ YY_RULE_SETUP
   printf("test");
 
 //  tokensym->count += 1;
-  return (int)tokensym->token;
+//  return (int)tokensym->token;
+  
+  return ID;
 }
 	YY_BREAK
-case 24:
+case 25:
 YY_RULE_SETUP
-#line 62 "i2p.l"
+#line 64 "i2p.l"
 ECHO;
 	YY_BREAK
-#line 931 "lex.yy.c"
+#line 937 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1926,7 +1932,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 62 "i2p.l"
+#line 64 "i2p.l"
 
 
 

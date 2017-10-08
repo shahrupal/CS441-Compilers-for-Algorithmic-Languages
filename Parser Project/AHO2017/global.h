@@ -68,3 +68,4 @@ int main();
 void lines();
 void lineend();
 void statement();
+void assignment();

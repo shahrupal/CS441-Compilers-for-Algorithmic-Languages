@@ -15,7 +15,7 @@ comparator 	[=][=]|[!][=]|[<]|[>]|[<][=]|[>][=]
 
 %%
 
-
+"="		{return '=';}
 "*"             {return '*';}
 "+"             {return '+';}
 "-"             {return '-';}
@@ -26,7 +26,7 @@ comparator 	[=][=]|[!][=]|[<]|[>]|[<][=]|[>][=]
 "\n"            {lineno++;}
 <<EOF>>         {return DONE;}
 
-"END"           {return DONE;}
+"END"           {return END;}
 "BEGIN"         {return BEGN;}
 "READ"          {return READ;}
 "PRINT"         {return PRINT;}

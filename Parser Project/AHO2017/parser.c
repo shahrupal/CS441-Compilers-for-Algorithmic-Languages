@@ -100,8 +100,10 @@ void factor()
 void match(t)
 	int t;
 {
-	if (lookahead == t)
+	if (lookahead == t){
+		printf("MATCH");
 		lookahead = yylex();
+	}
 	else error("syntax error - unexpected token");
 }
 
@@ -109,7 +111,7 @@ void match(t)
 
 /*---------- ADDED CODE ----------*/
 
-void lines(){
+void lines(){   //rename linenum
 
 	printf("%d",lookahead);
 	printf("\n");	
@@ -129,7 +131,7 @@ void lines(){
 
 }
 
-void lineend(){
+void lineend(){  //rename lines
 	
 	printf("%d",lookahead);
 	printf("\n");
@@ -139,15 +141,21 @@ void lineend(){
 			printf("begin\n");
 			match(lookahead);
 			break;
-		case DONE:
+		case END:
 			printf("end\n");
+			match(lookahead);
+			break;
+		case DONE:
+			printf("end of file\n");
 			match(lookahead);
 			break;
 		default:
 			printf("statement\n");
 			statement();	
 	}
+
 }
+
 
 void statement(){
 
@@ -159,24 +167,25 @@ void statement(){
 			printf("null\n");
 			match(lookahead);
 			match(';');
-			gotostmt();
-			break
+//			gotostmt();
+			break;
 		case ID:
 			printf("variable\n");
-			match(lookahead);
 			assignment();
-			match(";");
-			gotostmt();
+			match(lookahead);
+			match(';');
+//			gotostmt();
 			break;
 		case IF:
 			printf("if\n");
-			ifstmt();
+//			ifstmt();
 			break;
 		case PRINT:
 			printf("print\n");
 			match(lookahead);
 			match(';');
-			gotostmt();
+//			gotostmt();
+			break;
 		default:
 			error("parsing failed");
 		
@@ -184,3 +193,26 @@ void statement(){
 	}
 
 }
+
+void assignment(){
+
+	printf("%d",lookahead);
+	printf("\n");
+
+	switch(lookahead){
+		case ID:
+			printf("assignment\n");
+			match(lookahead);
+			match('=');
+//			printf("%d\n",lookahead);
+//			printf("yeet2");
+//			printf("%d",lookahead);
+			expr();
+//			printf("yeet");
+			break;
+		default:
+			error("parsing failed\n");
+	}
+
+}
+
