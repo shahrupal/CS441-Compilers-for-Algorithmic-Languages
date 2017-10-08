@@ -1,0 +1,5 @@
+ 1 BEGIN
+ 3 a = 6; GOTO 2;
+ 7 PRINT a; GOTO 9;
+ 9 END.
+
