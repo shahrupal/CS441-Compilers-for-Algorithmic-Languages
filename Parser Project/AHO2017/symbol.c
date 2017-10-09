@@ -22,7 +22,8 @@ entry* lookup(char *s, int current_token)
 {
         int h;
         entry *sym;
-
+	char* temp;
+	
         h = hash(s);
         for (sym = symtable[h]; sym != NULL; sym = sym->next)
             if (strcmp(s, sym->lexptr) == 0)
@@ -30,13 +31,26 @@ entry* lookup(char *s, int current_token)
 
         /* Create if not found */
         sym = (entry *) malloc(sizeof(entry));
-        sym->lexptr = s; /* assumed allocated elsewhere */
-        sym->token = current_token;
+        temp = (char *) malloc(sizeof(char));
+	temp = s;
+	sym->lexptr = temp; /* assumed allocated elsewhere */
+	sym->token = current_token;
         sym->next = symtable[h];
         symtable[h] = sym;
+
         return sym;
 }
 
 // Goes through the symbol table and prints out all of the symbols in the map
-void print_symbol_table() 
-{        printf("\nSYMBOL TABLE:\n"); /* TODO */}
+void print_symbol_table(){
+        printf("\nSYMBOL TABLE:\n"); 
+	for(int i = 0; i < SYMMAX; i++){
+		entry *sym = symtable[i];
+		if(sym != NULL){
+			printf("   %s: %i\n", sym->lexptr, sym->count);
+//			printf("%i\n",sym->count);
+//			free(sym->lexptr);
+			free(sym);
+		}
+	}
+}

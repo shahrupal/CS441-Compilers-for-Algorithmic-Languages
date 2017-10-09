@@ -6,13 +6,19 @@
 
 int main()
 {
-        lineno = 1; 
-	init();
-    printf("recursive descent for expressions: JWJ from Aho\n");
+    lineno = 1; 
+    init();
+    
+    printf("Rupal Shah\n");
+    
     time_t t;
-    time(&t); printf("%s\n",ctime(&t));
-	parse();
-	exit(0);  /* successful termination */
+    time(&t);
+    printf("%s\n",ctime(&t));
+    
+    parse();
+    
+    print_symbol_table();
+    exit(0);  /* successful termination */
 }
 
 /********************************************************************/

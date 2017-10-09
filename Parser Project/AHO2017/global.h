@@ -28,7 +28,7 @@
 #define COMPARATOR 272
 
 
-#define  SYMMAX 100   /* size of symtable */
+#define SYMMAX 100   /* size of symtable */
 
 char yystring[1000];
 int yylex();
@@ -43,8 +43,10 @@ struct entry { /* form of symbol table entry */
   entry *next;
   int count;
 };
+
 entry *symtable[SYMMAX]; /* symbol table */
 entry *tokensym; /* use in place of tokenval for identifiers */
+void print_symbol_table();
 
 void error(char *m);
 entry* lookup(char s[], int current_token);
@@ -65,7 +67,10 @@ void exit(int n);
 int main();
 
 //added functions
-void lines();
-void lineend();
-void statement();
-void assignment();
+void parse_lines();
+void parse_line_end();
+void parse_statement();
+void parse_assignment();
+void parse_goto();
+void parse_print();
+void parse_if_statement();

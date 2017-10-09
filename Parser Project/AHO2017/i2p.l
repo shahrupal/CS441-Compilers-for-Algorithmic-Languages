@@ -10,7 +10,7 @@ digit           [0-9]
 num             {digit}+
 alpha           [_a-zA-Z]
 identifier      {alpha}({alpha}|{digit})*
-string		["][a-zA-Z0-9]*["]
+string		["][ a-zA-Z0-9]*["]
 comparator 	[=][=]|[!][=]|[<]|[>]|[<][=]|[>][=]
 
 %%
@@ -52,13 +52,16 @@ comparator 	[=][=]|[!][=]|[<]|[>]|[<][=]|[>][=]
   if (strlen(yytext) >= BSIZE) {
     error("compiler error");
   }
-  tokensym = lookup(yytext, ID);
-  printf("test");
 
-//  tokensym->count += 1;
+ 
+  tokensym = lookup(yytext, ID);
+  tokensym->count += 1;
+//  printf("%d\n", tokensym->count);
+
+  return ID;
+
 //  return (int)tokensym->token;
   
-  return ID;
 }
 
 %%

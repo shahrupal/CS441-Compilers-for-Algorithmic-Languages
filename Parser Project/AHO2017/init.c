@@ -11,7 +11,7 @@ struct entry keywords[] = {
 void init()   /* loads keywords into symtable  */
 {
 	struct entry *p;
-	for (p= keywords; p-> token; p++)
+	for (p = keywords; p-> token; p++)
 		lookup(p->lexptr, p->token); /* lookup now inserts if missing */
 }
 

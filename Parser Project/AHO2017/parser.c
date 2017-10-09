@@ -3,14 +3,16 @@
 #include "global.h"
 
 int lookahead;
+int lookaheadcopy;
 void parse()   /*parses and translates expression list  */
 {
 	lookahead = yylex(); /* was lookahead = laxan() */
-	lines();
+	lookaheadcopy = lookahead;
+	parse_lines();
+	printf("Parsing Successful!\n");
 //	while(lookahead != DONE) {
 //		expr(); match(';');
-//	}
-//	lines();
+//	})
 }
 
 /*
@@ -101,7 +103,6 @@ void match(t)
 	int t;
 {
 	if (lookahead == t){
-		printf("MATCH");
 		lookahead = yylex();
 	}
 	else error("syntax error - unexpected token");
@@ -109,110 +110,174 @@ void match(t)
 
 
 
-/*---------- ADDED CODE ----------*/
+/*---------- ADDED CODE BY RUPAL SHAH----------*/
 
-void lines(){   //rename linenum
-
-	printf("%d",lookahead);
-	printf("\n");	
+void parse_lines(){ 
 
 	while(lookahead != DONE){
 		switch(lookahead){
-			case NUM:
-				printf("num\n");
+			case NUM:  //looks for line number
 				match(lookahead);
-				lineend();
+				parse_line_end();
 				continue;
-			default:
-				error("parsing failed\n");
+			default:  
+				error("Syntax Error.\n");
+				printf("Parsing Failed.\n");
 				break;
 		}
 	}
 
 }
 
-void lineend(){  //rename lines
-	
-	printf("%d",lookahead);
-	printf("\n");
+
+void parse_line_end(){ 
 
 	switch(lookahead){
 		case BEGN:
-			printf("begin\n");
 			match(lookahead);
 			break;
 		case END:
-			printf("end\n");
 			match(lookahead);
 			break;
 		case DONE:
-			printf("end of file\n");
 			match(lookahead);
 			break;
 		default:
-			printf("statement\n");
-			statement();	
+			parse_statement();	
 	}
 
 }
 
 
-void statement(){
-
-	printf("%d",lookahead);
-	printf("\n");
+void parse_statement(){
 
 	switch(lookahead){
 		case NUL:
-			printf("null\n");
 			match(lookahead);
 			match(';');
-//			gotostmt();
+			parse_goto();
 			break;
 		case ID:
-			printf("variable\n");
-			assignment();
-			match(lookahead);
+			parse_assignment();
 			match(';');
-//			gotostmt();
+			parse_goto();
 			break;
 		case IF:
-			printf("if\n");
-//			ifstmt();
+			parse_if_statement();
 			break;
 		case PRINT:
-			printf("print\n");
-			match(lookahead);
+			parse_print();
 			match(';');
-//			gotostmt();
+			parse_goto();
 			break;
 		default:
-			error("parsing failed");
-		
-			
+			error("Invalid Statement");
+			printf("Parsing Failed.\n");
 	}
 
 }
 
-void assignment(){
 
-	printf("%d",lookahead);
-	printf("\n");
+void parse_assignment(){
 
 	switch(lookahead){
 		case ID:
-			printf("assignment\n");
 			match(lookahead);
 			match('=');
-//			printf("%d\n",lookahead);
-//			printf("yeet2");
-//			printf("%d",lookahead);
 			expr();
-//			printf("yeet");
 			break;
 		default:
-			error("parsing failed\n");
+			error("Invalid Assignment");
+			printf("Parsing Failed\n");
 	}
 
 }
 
+void parse_goto(){
+	
+	switch(lookahead){
+		case GOTO:
+			match(lookahead);
+			match(NUM);  //look for number after goto
+			
+			if(lookahead == ';'){  //semicolon not required - do not output error if no semicolon
+				match(lookahead);
+			}
+		default:  
+			return;  //goto is not required - do not output error
+
+	}
+}
+
+
+void parse_print(){
+
+	switch(lookahead){
+		case PRINT:
+			match(lookahead);
+
+			switch(lookahead){  //cases that can follow PRINT statement
+				case ID:
+					match(lookahead);
+					break;	
+				case STRING:
+					match(lookahead);
+					break;
+				case NUM:
+					match(lookahead);
+					break;
+				default:
+					error("Invalid PRINT Statement.");
+					printf("Parsing Failed.\n");
+
+			}
+
+			break;
+		default:
+			error("Invalid PRINT Statement.");
+			printf("Parsing Failed.\n");
+	}
+}
+
+
+void parse_if_statement(){
+	
+	switch(lookahead){
+		case IF:
+			
+			match(lookahead);
+			match('(');
+			
+			expr();
+			
+			switch(lookahead){
+				case COMPARATOR:
+					match(COMPARATOR);
+					expr();
+					break;
+				default:
+					error("Invalid IF Statement.");
+					printf("Parsing Failed.\n");
+			}
+			
+			match(')');
+			
+			if(lookahead == THEN){
+				match(lookahead);
+			}
+
+			parse_goto();
+			
+			if(lookahead == ELSE){
+				match(lookahead);
+				parse_goto();
+			}
+				
+			break;
+		default:
+			error("Invalid IF Statement.");
+			printf("Parsing Failed.\n");
+	}
+
+
+}
