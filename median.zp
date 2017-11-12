@@ -1,0 +1,45 @@
+
+int main(){
+
+    /* INITIALIZE VARIABLES */
+    int a, b, c, d, e;
+    int temp;  
+
+
+    /* STORE USER INPUT */
+    puts("Enter 1st number: ");
+    a = getnum();
+
+    puts("Enter 2nd number: ");
+    b = getnum();
+
+    puts("Enter 3rd number: ");
+    c = getnum();
+
+    puts("Enter 4th number: ");
+    d = getnum();
+
+    puts("Enter 5th number: ");
+    e = getnum();
+
+
+    /* SORT INPUTTED NUMBERS */
+    if(a > b) { temp = a;  a = b;  b = temp; }
+    if(a > c) { temp = a;  a = c;  c = temp; }
+    if(a > d) { temp = a;  a = d;  d = temp; }
+    if(a > e) { temp = a;  a = e;  e = temp; }
+    if(b > c) { temp = b;  b = c;  c = temp; }
+    if(b > d) { temp = b;  b = d;  d = temp; }
+    if(b > e) { temp = b;  b = e;  e = temp; }
+    if(c > d) { temp = c;  c = d;  d = temp; }
+    if(c > e) { temp = c;  c = e;  e = temp; }
+    if(d > e) { temp = d;  d = e;  e = temp; }
+
+
+    /* OUTPUT 3RD NUMBER IN SORTED RANGE (MEDIAN) */
+    puts("The median of the inputted range is: ");
+    putn(c);
+
+
+    return 0;
+}
